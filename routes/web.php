@@ -11,14 +11,13 @@
 |
 */
 
+use App\Services\Contracts\CarSharing;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/cars', function () {
-
+Route::get('/cars', function (CarSharing $carsCollection) {
+    return response()->json($carsCollection->getAllCars());
 });
-
-Route::get('/cars/random', function () {
-
+Route::get('/cars/random', function (CarSharing $carsCollection) {
+    return view("car", $carsCollection->getRandomCar());
 });
